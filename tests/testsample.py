@@ -41,36 +41,36 @@ class TestAll(TestCase):
 
     def test_related_tasks_to_charity_manager(self):
         objects = Task.objects.related_tasks_to_charity(user=self.user)
-        self.assertEqual(objects.count(), 2)
+        self.assertEqual(objects.count(), 2, '\nتعداد تسک‌هایی که کاربر مورد نظر به عنوان charity است را به درستی محاسبه نکرده‌اید.')
         objects = Task.objects.related_tasks_to_charity(user=self.user_2)
-        self.assertEqual(objects.count(), 2)
+        self.assertEqual(objects.count(), 2, '\nتعداد تسک‌هایی که کاربر مورد نظر به عنوان charity است را به درستی محاسبه نکرده‌اید.')
         objects = Task.objects.related_tasks_to_charity(user=self.user_3)
-        self.assertEqual(objects.count(), 3)
+        self.assertEqual(objects.count(), 3, '\nتعداد تسک‌هایی که کاربر مورد نظر به عنوان charity است را به درستی محاسبه نکرده‌اید.')
         objects = Task.objects.related_tasks_to_charity(user=self.user_4)
-        self.assertEqual(objects.count(), 0)
+        self.assertEqual(objects.count(), 0, '\nتعداد تسک‌هایی که کاربر مورد نظر به عنوان charity است را به درستی محاسبه نکرده‌اید.')
 
     def test_related_tasks_to_benefactor(self):
         task = Task.objects.first()
         task.assigned_benefactor = self.benefactor
         task.save()
         objects = Task.objects.related_tasks_to_benefactor(user=self.user)
-        self.assertEqual(objects.count(), 2)
+        self.assertEqual(objects.count(), 2, '\nتعداد تسک‌هایی که کاربر مورد نظر به عنوان benefactor است را به درستی محاسبه نکرده‌اید.')
         objects = Task.objects.related_tasks_to_benefactor(user=self.user_2)
-        self.assertEqual(objects.count(), 2)
+        self.assertEqual(objects.count(), 2, '\nتعداد تسک‌هایی که کاربر مورد نظر به عنوان benefactor است را به درستی محاسبه نکرده‌اید.')
         objects = Task.objects.related_tasks_to_benefactor(user=self.user_3)
-        self.assertEqual(objects.count(), 0)
+        self.assertEqual(objects.count(), 0, '\nتعداد تسک‌هایی که کاربر مورد نظر به عنوان benefactor است را به درستی محاسبه نکرده‌اید.')
         objects = Task.objects.related_tasks_to_benefactor(user=self.user_4)
-        self.assertEqual(objects.count(), 1)
+        self.assertEqual(objects.count(), 1, '\nتعداد تسک‌هایی که کاربر مورد نظر به عنوان benefactor است را به درستی محاسبه نکرده‌اید.')
 
     def test_all_related_tasks_to_user(self):
         # task = Task.objects.first()
         # task.assigned_benefactor = self.benefactor
         # task.save()
         objects = Task.objects.all_related_tasks_to_user(user=self.user)
-        self.assertEqual(objects.count(), 4)
+        self.assertEqual(objects.count(), 4, '\nتعداد تسک‌هایی که کاربر مورد نظر به هر طریقی به آن‌ها دسترسی دارد را به درستی محاسبه نکرده‌اید.')
         objects = Task.objects.all_related_tasks_to_user(user=self.user_2)
-        self.assertEqual(objects.count(), 4)
+        self.assertEqual(objects.count(), 4, '\nتعداد تسک‌هایی که کاربر مورد نظر به هر طریقی به آن‌ها دسترسی دارد را به درستی محاسبه نکرده‌اید.')
         objects = Task.objects.all_related_tasks_to_user(user=self.user_3)
-        self.assertEqual(objects.count(), 4)
+        self.assertEqual(objects.count(), 4, '\nتعداد تسک‌هایی که کاربر مورد نظر به هر طریقی به آن‌ها دسترسی دارد را به درستی محاسبه نکرده‌اید.')
         objects = Task.objects.all_related_tasks_to_user(user=self.user_4)
-        self.assertEqual(objects.count(), 2)
+        self.assertEqual(objects.count(), 2, '\nتعداد تسک‌هایی که کاربر مورد نظر به هر طریقی به آن‌ها دسترسی دارد را به درستی محاسبه نکرده‌اید.')
