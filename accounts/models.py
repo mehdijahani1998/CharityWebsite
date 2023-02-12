@@ -10,7 +10,7 @@ class User(AbstractUser):
     description = models.TextField(null=True, blank=True)
     
     email = models.EmailField(null=True, blank=True)
-    first_name = models.CharField(null= True, blank=True)
+    first_name = models.CharField(null= True, blank=True, max_length=50)
 
     GENDER_CHOICES = (
         ("M", "male"),
@@ -23,7 +23,7 @@ class User(AbstractUser):
     is_superuser = models.BooleanField(default=False)
 
     last_login = models.DateTimeField(null=True, blank=True)
-    last_name = models.CharField(null=True, blank=True)
+    last_name = models.CharField(null=True, blank=True, max_length=50)
 
     phone = models.CharField(max_length=15, null=True, blank=True)
 
