@@ -3,22 +3,27 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-    adress = models.TextField()
-    age = models.PositiveSmallIntegerField()
+    adress = models.TextField(null=True, blank=True)
+    age = models.PositiveSmallIntegerField(null=True, blank=True)
     
-    description = models.TextField()
-
     date_joined = models.DateTimeField(auto_now_add=True)
+    description = models.TextField(null=True, blank=True)
+    
+    email = models.EmailField(null=True, blank=True)
+    first_name = models.CharField(null= True, blank=True)
 
     GENDER_CHOICES = (
         ("M", "male"),
         ("F", "female"),
     )
-    gender = models.CharField(choices=GENDER_CHOICES, max_length=1)
+    gender = models.CharField(choices=GENDER_CHOICES, max_length=1, null=True, blank=True)
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
-    phone = models.CharField(max_length=15)
+    last_login = models.DateTimeField(null=True, blank=True)
+    last_name = models.CharField(null=True, blank=True)
+
+    phone = models.CharField(max_length=15, null=True, blank=True)
 
