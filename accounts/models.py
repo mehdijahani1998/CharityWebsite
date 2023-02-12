@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-    adress = models.TextField(null=True, blank=True)
+    address = models.TextField(null=True, blank=True)
     age = models.PositiveSmallIntegerField(null=True, blank=True)
     
     date_joined = models.DateTimeField(auto_now_add=True)
