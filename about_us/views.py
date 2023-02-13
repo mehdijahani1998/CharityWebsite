@@ -1,6 +1,3 @@
-from django.shortcuts import render
-from accounts.models import *
-
 def about_us(request):
     # View for about-us page
     users = User.objects.all()

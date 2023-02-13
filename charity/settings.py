@@ -20,33 +20,48 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "t1m$51#g8=9fbqg-+c_4&^d!zmh0yv@!1#&2vms1%ltndz-&t3"
+SECRET_KEY = "d8+lpdyupy-+snp_@iwh3bz)a0@2xf&==4x$v&bqw*axn@2c$d"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # Custom User Model
 AUTH_USER_MODEL = "accounts.User"
 
 # Application definition
 
-INSTALLED_APPS = [
+DJANGO_DEFAULT_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "corsheaders",
     "accounts",
     "charities",
     "about_us",
 ]
 
+THIRD_PARTY_APPS = [
+    "rest_framework",
+    "rest_framework.authtoken",
+]
+
+LOCAL_APPS = [
+    "accounts.apps.AccountsConfig",
+    "charities.apps.CharitiesConfig",
+    "about_us.apps.AboutUsConfig",
+]
+
+INSTALLED_APPS = DJANGO_DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -124,9 +139,11 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
     ],
 }
+
 CORS_ORIGIN_ALLOW_ALL = True
