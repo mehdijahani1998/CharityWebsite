@@ -7,41 +7,30 @@ from accounts.models import User
 @admin.register(User)
 class UserAdmin(DefaultUserAdmin):
 
-    def custom_titled_filter(title):
-        class Wrapper(admin.FieldListFilter):
-            def __new__(cls, *args, **kwargs):
-                instance = admin.FieldListFilter.create(*args, **kwargs)
-                instance.title = title
-                return instance
-        return Wrapper
-
-    # @admin.display(description='STAFF STATUS')
-    # def staff_status(self):
-    #     return self.is_staff
-
-    @admin.display(description='EMAIL ADDRESS')
-    def email_address(self):
-        return self.email
-    
-    # @admin.display(description='ACTIVE')
-    # def active_status(self):
-    #     return self.is_active
-
-    def is_active(self, obj):
-        return obj.is_active
-    is_active.verbose_name = 'ACTIVE'
-    is_active.boolean = True
-    is_active.editable = True
-
-    list_display = ('username', email_address, 'first_name', 'last_name', 'is_staff', 'is_active')
+    list_display = ('username', 'email', 'first_name', 'last_name', 'is_staff', 'is_active')
     list_editable = (
-        'is_active',
         'is_staff',
+        'is_active'
     )
     sortable_by = ['username']
     list_filter = (
-        'gender',
-        ('is_staff', custom_titled_filter("staff status")),
-        ('is_superuser', custom_titled_filter("superuser status")),
-        ('is_active', custom_titled_filter("active")),
+        'gender', 'is_staff', 'is_superuser', 'is_active'
+    )
+
+    fieldsets = (
+        (None, {
+            'fields': ('username', 'password')
+        }),
+        ('Personal info', { 
+            'fields': ('first_name', 'last_name', 'email', 'gender', 'age', 'description') 
+        }),
+        ('Contact info', {
+            'fields': ('phone', 'address')
+        }),
+        ('Permissions', {
+            'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')
+        }),
+        ('Important dates', {
+            'fields': ('last_login', 'date_joined')
+        }),
     )
